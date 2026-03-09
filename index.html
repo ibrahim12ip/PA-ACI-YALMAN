@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAÇACI YALMAN</title>
+    <link rel="shortcut icon" href="icon.jpg" type="image/x-icon">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #630000;
+            --primary-light: #8B0000;
+            --accent: #D4AF37;
+            --dark: #1a1a1a;
+            --light: #fdfaf7;
+            --white: #ffffff;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigasyon */
+        nav {
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i { color: var(--accent); font-size: 1.8rem; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i { font-size: 1rem; color: var(--primary); opacity: 0.7; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Bölümü */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1469') no-repeat center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        header p {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            max-width: 800px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .btn-group { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+        .btn {
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); }
+
+        .btn:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+        /* Bölümler */
+        section { padding: 100px 10% 60px; }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--primary);
+        }
+
+        h2::after {
+            content: ''; display: block; width: 80px; height: 3px;
+            background: var(--accent); margin: 20px auto;
+        }
+
+        /* Özellik Kartları */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card:hover { transform: translateY(-10px); border-bottom-color: var(--primary); }
+
+        /* Menü Kartları */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .menu-card:hover { transform: scale(1.02); }
+
+        .menu-img { width: 100%; height: 280px; overflow: hidden; }
+        .menu-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+
+        .menu-info { padding: 30px; }
+        .menu-info h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.5rem; }
+        
+        .price-tag { 
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light); 
+            padding: 8px 18px; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            color: var(--primary);
+            margin-top: 15px;
+        }
+
+        /* Yorumlar */
+        #reviews { background: #1a1a1a; color: var(--white); }
+        .review-card {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+        }
+        .review-card i.fa-quote-left {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* İletişim */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+        .contact-item i { color: var(--accent); font-size: 1.4rem; margin-top: 5px; }
+
+        .map-frame { border-radius: 20px; overflow: hidden; height: 100%; min-height: 350px; }
+
+        footer {
+            background: var(--dark);
+            color: #777;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .social-icons { margin-bottom: 20px; }
+        .social-icons a { color: var(--accent); margin: 0 10px; font-size: 1.3rem; text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .contact-container { grid-template-columns: 1fr; }
+            section { padding: 60px 5%; }
+            header h1 { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">
+        <i class="fa-solid fa-bowl-food"></i> PAÇACI YALMAN
+    </a>
+    <div class="nav-links">
+        <a href="#about"><i class="fa-solid fa-star"></i> Biz Kimiz?</a>
+        <a href="#menu"><i class="fa-solid fa-utensils"></i> Menü</a>
+        <a href="#contact"><i class="fa-solid fa-phone"></i> İletişim</a>
+    </div>
+</nav>
+
+<header>
+    <h1>Lezzetin En Saf Hali.</h1>
+    <p>Antakya'nın kalbinde, 15 saatlik sabır ve ustalıkla hazırlanan geleneksel sakatat şöleni.</p>
+    <div class="btn-group">
+        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-location-dot"></i> Yol Tarifi Al</a>
+        <a href="#menu" class="btn btn-outline"><i class="fa-solid fa-magnifying-glass"></i> Menüyü Keşfet</a>
+    </div>
+</header>
+
+<section id="about">
+    <h2>Sanatımız Hakkında</h2>
+    <div class="features">
+        <div class="feature-card">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <h3>15 Saat Sabır</h3>
+            <p>Kuzu paçalarımız kolajenini tam salması için 15 saat boyunca ağır ateşte demlenir.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>%100 Hijyen</h3>
+            <p>Modern mutfak standartlarında, geleneksel temizlik yöntemlerinden taviz vermiyoruz.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fa-solid fa-meat"></i>
+            <h3>Bol Malzeme</h3>
+            <p>Hileye yer yok! Her kasede net 130 gram seçme kuzu eti sizi bekliyor.</p>
+        </div>
+    </div>
+</section>
+
+<section id="menu">
+    <h2>Lezzet Durakları</h2>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <div class="menu-img"><img src="1.jpg" alt="Kuzu Kelle Paça"></div>
+            <div class="menu-info">
+                <h3>Kuzu Kelle Paça</h3>
+                <p>15 saatlik emek, bol sarımsak ve sirke eşliğinde şifa deposu.</p>
+                <span class="price-tag"><i class="fa-solid fa-fire"></i> Efsane Lezzet</span>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-img"><img src="images.jpg" alt="Şırdan"></div>
+            <div class="menu-info">
+                <h3>Yerli Şırdan</h3>
+                <p>Adana usulü, özel baharat karışımlı ve her zaman taze.</p>
+                <span class="price-tag"><i class="fa-solid fa-award"></i> 1. Sınıf Seçme</span>
+            </div>
+        </div>
+        <div class="menu-card">
+            <div class="menu-img"><img src="download.jpg" alt="Mumbar"></div>
+            <div class="menu-info">
+                <h3>Mumbar Dolması</h3>
+                <p>Anne usulü temizlenmiş, bol iç harçlı 400gr dev porsiyon.</p>
+                <span class="price-tag"><i class="fa-solid fa-bowl-rice"></i> Doyurucu</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reviews">
+    <h2>Müdavim Yorumları</h2>
+    <div class="features">
+        <div class="review-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>"Hatay'da bu kadar temiz ve lezzetli paça içmedim. Etleri gerçekten pamuk gibi."</p>
+            <br><strong>- Abdullah B.</strong>
+        </div>
+        <div class="review-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>"Şırdanlar tam olması gerektiği gibi. Baharat dengesi mükemmel."</p>
+            <br><strong>- Mert G.</strong>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Bize Ulaşın</h2>
+    <div class="contact-container">
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="fa-solid fa-clock"></i>
+                <div>
+                    <h3>Çalışma Saatleri</h3>
+                    <p>Haftanın her günü: 08:00 – 05:00</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <div>
+                    <h3>Konum</h3>
+                    <p>Büyükdalyan Mah. 5.Sok No:1, Antakya/Hatay</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div>
+                    <h3>Rezervasyon & Sipariş</h3>
+                    <p><a href="tel:+905336150222" style="color:var(--primary); font-size: 1.5rem; font-weight: 800; text-decoration: none;">0533 615 02 22</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="map-frame">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3204.4!2d36.1!3d36.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDEyJzAwLjAiTiAzNsKwMDYnMDAuMCJF!5e0!3m2!1str!2str!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/yalmanpaca/"><i class="fa-brands fa-instagram"></i></a>
+        <a href="tel:+905336150222"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <p>Antakya. Geleneksel Lezzetin Modern Adresi.</p>
+</footer>
+
+</body>
+</html>
